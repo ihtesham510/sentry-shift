@@ -1,0 +1,25 @@
+{
+  "name": "@sentry-shift/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@better-auth/expo": "catalog:",
+    "@sentry-shift/db": "workspace:*",
+    "@sentry-shift/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@sentry-shift/config": "workspace:*",
+    "typescript": "^6"
+  }
+}
