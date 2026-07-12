@@ -6,7 +6,7 @@
 			"root": "apps/web",
 			"framework": "vite",
 			"installCommand": "cd ../.. && bun install",
-			"buildCommand": "VITE_SERVER_URL=/api bun run build",
+			"buildCommand": "VITE_SERVER_URL=/api bun run build && bun run db:migrate",
 			"rewrites": [
 				{
 					"source": "/(.*)",
@@ -18,7 +18,7 @@
 			"root": "apps/server",
 			"framework": "hono",
 			"entrypoint": "src/index.ts",
-			"installCommand": "cd ../.. && bun install && bun run db:migrate",
+			"installCommand": "cd ../.. && bun install",
 			"routes": [
 				{
 					"src": "/api/((?!auth(?:/|$)).*)",
