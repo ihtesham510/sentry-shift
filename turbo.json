@@ -44,6 +44,10 @@
 		},
 		"db:down": {
 			"cache": false
+		},
+		"db:build": {
+			"env": ["DATABASE_URL"],
+			"cache": false
 		}
 	}
 }
