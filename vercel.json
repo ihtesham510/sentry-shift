@@ -6,7 +6,7 @@
 			"root": "apps/web",
 			"framework": "vite",
 			"installCommand": "cd ../.. && bun install",
-			"buildCommand": "VITE_SERVER_URL=/api bun run build && bun run db:migrate",
+			"buildCommand": "VITE_SERVER_URL=/api bun run build",
 			"rewrites": [
 				{
 					"source": "/(.*)",
