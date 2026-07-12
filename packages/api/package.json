@@ -1,27 +1,27 @@
 {
-  "name": "@sentry-shift/api",
-  "type": "module",
-  "exports": {
-    ".": {
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "default": "./src/*.ts"
-    }
-  },
-  "scripts": {},
-  "dependencies": {
-    "@sentry-shift/auth": "workspace:*",
-    "@sentry-shift/db": "workspace:*",
-    "@sentry-shift/env": "workspace:*",
-    "@trpc/client": "catalog:",
-    "@trpc/server": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:"
-  },
-  "devDependencies": {
-    "@sentry-shift/config": "workspace:*",
-    "hono": "catalog:",
-    "typescript": "^6"
-  }
+	"name": "@sentry-shift/api",
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts"
+		}
+	},
+	"scripts": {},
+	"dependencies": {
+		"@sentry-shift/auth": "workspace:*",
+		"@sentry-shift/db": "workspace:*",
+		"@sentry-shift/env": "workspace:*",
+		"@trpc/client": "catalog:",
+		"@trpc/server": "catalog:",
+		"dotenv": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@sentry-shift/config": "workspace:*",
+		"hono": "catalog:",
+		"typescript": "^6"
+	}
 }
