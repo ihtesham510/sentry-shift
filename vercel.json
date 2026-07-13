@@ -19,7 +19,7 @@
 			"framework": "hono",
 			"entrypoint": "src/index.ts",
 			"installCommand": "cd ../.. && bun install",
-			"buildCommand": "cd ../.. && bun run db:build",
+			"buildCommand": "cd ../.. && bun migrate:prod",
 			"routes": [
 				{
 					"src": "/api/((?!auth(?:/|$)).*)",

@@ -43,6 +43,7 @@
 		"db:stop": "turbo run db:stop -F @sentry-shift/db",
 		"db:down": "turbo run db:down -F @sentry-shift/db",
 		"db:build": "turbo run build -F @sentry-shift/db",
+		"migrate:prod": "bun run ./scripts/migrate-prod.ts",
 		"deploy:setup": "vercel link",
 		"dev:vercel": "vercel dev -L",
 		"env:preview": "tsx scripts/sync-vercel-env.ts preview",
