@@ -1,0 +1,26 @@
+{
+	"name": "@sentry-shift/s3",
+	"version": "0.0.0",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": {
+			"default": "./index.ts"
+		}
+	},
+	"scripts": {
+		"s3:start": "docker compose up -d",
+		"s3:watch": "docker compose up",
+		"s3:stop": "docker compose stop",
+		"s3:down": "docker compose down"
+	},
+	"devDependencies": {
+		"@sentry-shift/config": "workspace:*",
+		"@types/bun": "catalog:",
+		"typescript": "^6"
+	},
+	"dependencies": {
+		"@aws-sdk/client-s3": "^3.1086.0",
+		"@aws-sdk/s3-request-presigner": "^3.1086.0"
+	}
+}

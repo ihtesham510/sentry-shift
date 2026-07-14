@@ -22,14 +22,14 @@
 	"dependencies": {
 		"@sentry-shift/env": "workspace:*",
 		"dotenv": "catalog:",
-		"drizzle-orm": "^0.45.2",
+		"drizzle-orm": "catalog:",
 		"pg": "^8.22.0",
 		"zod": "catalog:"
 	},
 	"devDependencies": {
 		"@sentry-shift/config": "workspace:*",
 		"@types/pg": "^8.20.0",
-		"drizzle-kit": "^0.31.10",
+		"drizzle-kit": "catalog:",
 		"typescript": "^6"
 	}
 }

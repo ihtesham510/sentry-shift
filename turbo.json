@@ -48,6 +48,20 @@
 		"db:build": {
 			"env": ["DATABASE_URL"],
 			"cache": false
+		},
+		"s3:start": {
+			"cache": false,
+			"persistent": true
+		},
+		"s3:stop": {
+			"cache": false
+		},
+		"s3:watch": {
+			"cache": false,
+			"persistent": true
+		},
+		"s3:down": {
+			"cache": false
 		}
 	}
 }

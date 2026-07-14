@@ -12,12 +12,16 @@
 	"scripts": {},
 	"dependencies": {
 		"@sentry-shift/auth": "workspace:*",
+		"@sentry-shift/s3": "workspace:*",
 		"@sentry-shift/db": "workspace:*",
 		"@sentry-shift/env": "workspace:*",
 		"@trpc/client": "catalog:",
 		"@trpc/server": "catalog:",
 		"dotenv": "catalog:",
-		"zod": "catalog:"
+		"zod": "catalog:",
+		"zod-form-data": "catalog:",
+		"drizzle-zod": "catalog:",
+		"drizzle-orm": "catalog:"
 	},
 	"devDependencies": {
 		"@sentry-shift/config": "workspace:*",

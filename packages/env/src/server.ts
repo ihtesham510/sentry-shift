@@ -29,6 +29,13 @@ export const env = createEnv({
 		BETTER_AUTH_SECRET: z.string().min(32),
 		BETTER_AUTH_URL: z.url(),
 		CORS_ORIGIN: z.url(),
+		// s3
+		S3URL: z.url(),
+		S3_REGION: z.string().min(1),
+		ACCESSKEY_ID: z.string().min(1),
+		SECRET_ACCESS_KEY: z.string().min(1),
+		BUCKET_NAME: z.string().min(1),
+
 		NODE_ENV: z
 			.enum(['development', 'production', 'test'])
 			.default('development'),
