@@ -1,2 +1,2 @@
 lint-staged
-check
+bun check
