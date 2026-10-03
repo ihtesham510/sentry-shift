@@ -1,0 +1,66 @@
+name: sentry-shift
+
+services:
+  db:
+    image: malisper/pgrust:v0.2
+    container_name: pgrust 
+    environment:
+      POSTGRES_PASSWORD: secret
+      POSTGRES_USER: postgres 
+      POSTGRES_DB: postgres 
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  rustfs-perms:
+    image: alpine
+    volumes:
+      - ./rustfs/data:/fix/data
+      - ./rustfs/logs:/fix/logs
+    command: chown -R 10001:10001 /fix
+    restart: "no"
+
+  rustfs:
+    image: rustfs/rustfs:latest
+    container_name: rustfs
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY}
+      RUSTFS_VOLUMES: /data
+      RUSTFS_ADDRESS: ":9000"
+      RUSTFS_CONSOLE_ADDRESS: ":9001"
+      RUSTFS_CONSOLE_ENABLE: "true"
+    volumes:
+      - rustfs-data:/data
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:9000/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 20s
+    restart: unless-stopped
+
+  create-bucket:
+    image: rustfs/rc:latest
+    depends_on:
+      rustfs:
+        condition: service_healthy
+    environment:
+      RUSTFS_ACCESS_KEY: ${RUSTFS_ACCESS_KEY}
+      RUSTFS_SECRET_KEY: ${RUSTFS_SECRET_KEY}
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        /usr/bin/rc alias set rustfs http://rustfs:9000 "$${RUSTFS_ACCESS_KEY}" "$${RUSTFS_SECRET_KEY}" \
+          --region us-east-1 --bucket-lookup path
+        /usr/bin/rc bucket create rustfs/my-bucket --ignore-existing
+    restart: "no"
+
+volumes:
+  pgdata:
+  rustfs-data:
