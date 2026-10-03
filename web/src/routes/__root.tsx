@@ -5,6 +5,7 @@ import { createRootRouteWithContext, Outlet } from "@tanstack/react-router"
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools"
 
 import "../styles.css"
+import { Loader } from "@/components/common/loader"
 import { authQuery } from "@/lib/quries"
 
 export const Route = createRootRouteWithContext<{
@@ -18,6 +19,7 @@ export const Route = createRootRouteWithContext<{
 		})
 		return { session }
 	},
+	pendingComponent: Loader,
 })
 
 function RootComponent() {
