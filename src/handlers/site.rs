@@ -9,7 +9,6 @@ use chrono::{DateTime, Utc};
 use uuid::Uuid;
 
 use crate::{error::AppError, state::AppState, types::*};
-
 pub async fn get_sites(State(state): State<AppState>) -> Result<Json<Vec<Site>>, AppError> {
     let AppState { pg_pool, .. } = state;
     let sites = sqlx::query_as!(
@@ -149,10 +148,10 @@ pub async fn add_site_image(
 pub async fn get_site_pictures(
     Path(id): Path<i32>,
     State(state): State<AppState>,
-) -> Result<Json<Vec<SitePicture>>, AppError> {
+) -> Result<Json<Vec<serde_json::Value>>, AppError> {
     let AppState { pg_pool, s3, .. } = state;
 
-    let pictures = sqlx::query_as!(
+    let query = sqlx::query_as!(
         SitePicture,
         r#"
         SELECT * FROM site_picture WHERE site_id = $1;
@@ -162,12 +161,20 @@ pub async fn get_site_pictures(
     .fetch_all(pg_pool.as_ref())
     .await?;
 
-    let urls: Vec<String> = Vec::new();
+    let _pictures = query.iter().map(|val| {
+        let s3_client = s3.clone();
+        async move {
+            let mut picture: serde_json::Value = serde_json::to_value(&val).unwrap();
+            let url = s3_client.get_presigned_url(val.key.clone()).await.unwrap();
 
-    for pic in pictures {
-        let url = s3.get_presigned_url(pic.key).await.ok();
-        urls.push(url);
-    }
+            if let Some(obj) = picture.as_object_mut() {
+                obj.insert("url".to_string(), serde_json::Value::String(url));
+            }
+
+            picture
+        }
+    });
+    let pictures = futures::future::join_all(_pictures).await;
 
     Ok(Json(pictures))
 }
