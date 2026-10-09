@@ -71,11 +71,3 @@ pub struct UploadSiteImageReq {
     pub key: String,
     pub site_id: i32,
 }
-
-#[derive(Serialize)]
-pub struct WithExtra<T, E> {
-    #[serde(flatten)]
-    pub inner: T,
-    #[serde(flatten)]
-    pub extra: E,
-}
